@@ -7,7 +7,7 @@ ApplicationWindow {
     id: app
     visible: true
     title: moduleName
-    visibility: 'Windowed'
+    visibility: 'Maximized'
     color: 'black'
     property string moduleName: 'unik-ws-android-client-1'
     property int altoBarra: 0

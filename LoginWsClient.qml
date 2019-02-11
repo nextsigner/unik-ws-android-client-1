@@ -1,7 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
-import Qt.WebSockets 1.0
+import QtWebSockets 1.0
 import "qwebchannel.js" as WebChannel
 
 Rectangle {

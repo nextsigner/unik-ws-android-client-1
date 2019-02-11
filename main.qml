@@ -6,13 +6,10 @@ import Qt.labs.settings 1.0
 ApplicationWindow {
     id: app
     visible: true
-    width: Screen.width/2
-    height: Screen.desktopAvailableHeight-altoBarra
-    x:Screen.width/2
-    title: qsTr("WsSqlClient Example by nextsigner")
+    title: moduleName
     visibility: 'Windowed'
     color: 'black'
-    property string moduleName: 'unikastclient'
+    property string moduleName: 'unik-ws-android-client-1'
     property int altoBarra: 0
 
     property int fs: appSettings.fs

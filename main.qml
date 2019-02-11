@@ -40,49 +40,74 @@ ApplicationWindow {
             id:col1
             anchors.centerIn: parent
             spacing: app.fs
-            Row{
-                spacing: app.fs
-                Button{
-                    id: botPin11
-                    text: checked?'Poner Pin 11 en Low':'Poner Pin 11 en High'
-                    font.pixelSize: app.fs
-                    checkable: true
-                    onClicked: {
-                        var code=''
-                        code+='import QtQuick 2.0\n'
-                        code+='Item{\n'
-                        code+=' Component.onCompleted: {\n'
-                        if(!checked){
-                            code+='unik.writePinHigh(11)\n'
-                        }else{
-                            code+='unik.writePinLow(11)\n'
-                        }
-                        code+=' }\n'
-                        code+='}\n'
-                        logWsClient.sendCode(code)
-                    }
-                }
-                Button{
-                    id:botPin13
-                    text: checked?'Poner Pin 13 en Low':'Poner Pin 13 en High'
-                    font.pixelSize: app.fs
-                    checkable: true
-                    onClicked: {
-                        var code=''
-                        code+='import QtQuick 2.0\n'
-                        code+='Item{\n'
-                        code+=' Component.onCompleted: {\n'
-                        if(!checked){
-                            code+='unik.writePinHigh(13)\n'
-                        }else{
-                            code+='unik.writePinLow(13)\n'
-                        }
-                        code+=' }\n'
-                        code+='}\n'
-                        logWsClient.sendCode(code)
-                    }
+
+            Button{
+                text: 'Enviar Rectangle{} 1'
+                font.pixelSize: app.fs
+                onClicked: {
+                    var code=''
+                    code+='import QtQuick 2.0\n'
+                    code+='Rectangle{\n'
+                    code+=' id:r1\n'
+                    code+=' width: 300\n'
+                    code+=' height: width\n'
+                    code+=' border.width:4\n'
+                    code+=' border.color: "yellow"\n'
+                    code+=' color: "green"\n'
+                    code+='}\n'
+                    logWsClient.sendCode(code)
                 }
             }
+            Button{
+                text: 'Enviar Rectangle{} 2'
+                font.pixelSize: app.fs
+                 onClicked: {
+                    var code=''
+                    code+='import QtQuick 2.0\n'
+                    code+='Rectangle{\n'
+                    code+=' id:r2\n'
+                    code+=' width: 200\n'
+                    code+=' height: 50\n'
+                    code+=' border.width:4\n'
+                    code+=' border.color: "green"\n'
+                    code+=' color: "red"\n'
+                    code+=' anchors.centerIn: parent\n'
+                     code+=' Behavior on rotation{NumberAnimation{duration:1000}}\n'
+                    code+='}\n'
+                    logWsClient.sendCode(code)
+                }
+            }
+
+            Button{
+                text: 'Rotar R1'
+                font.pixelSize: app.fs
+                onClicked: {
+                    var code=''
+                    code+='import QtQuick 2.0\n'
+                    code+='Item{\n'
+                    code+=' Component.onCompleted: {\n'
+                    code+='     parent.children[0].rotation+=10\n'
+                    code+=' }\n'
+                    code+='}\n'
+                    logWsClient.sendCode(code)
+                }
+            }
+            Button{
+                text: 'Rotar R2'
+                font.pixelSize: app.fs
+                onClicked: {
+                    var code=''
+                    code+='import QtQuick 2.0\n'
+                    code+='Item{\n'
+                    code+=' Component.onCompleted: {\n'
+                    code+='     parent.children[1].rotation+=30\n'
+                    code+=' }\n'
+                    code+='}\n'
+                    logWsClient.sendCode(code)
+                }
+            }
+
+
         }
     }
     /*UnikTextEditor{
@@ -112,7 +137,7 @@ ApplicationWindow {
         onVisibleChanged: {
             if(!visible){
                 focus=false
-                }else{
+            }else{
                 //unikTextEditor.visible=true
             }
         }
@@ -125,7 +150,7 @@ ApplicationWindow {
             unikTextEditor.visible=true
             unikTextEditor.textEditor.focus=true
             unikTextEditor.textEditor.setPos()
-        }        
+        }
         onErrorSucess: {
             console.log('WebSockets Error success...')
             focus=true
@@ -159,17 +184,17 @@ ApplicationWindow {
     Shortcut {
         sequence: "Shift+Return"
         onActivated: {
-           if(app.visibility!==Window.Maximized){
+            if(app.visibility!==Window.Maximized){
                 app.visibility='Maximized'
-           }else{
-            app.visibility='Windowed'
-           }
+            }else{
+                app.visibility='Windowed'
+            }
         }
     }
     Shortcut {
         sequence: "Ctrl+Shift+q"
         onActivated: {
-           Qt.quit()
+            Qt.quit()
         }
     }
     onVisibilityChanged: {
